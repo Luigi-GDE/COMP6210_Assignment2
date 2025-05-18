@@ -1,0 +1,327 @@
+
+body {
+    background-color: #333;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #333;
+}
+
+.background {
+    background-color: #333;
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #f45454;
+}
+
+h2 {
+    color: #b9b9b9;
+}
+
+.intro{
+    width: 100%;
+    height: auto;
+    background-color: #0e0d0d;
+    padding: 1em;
+    color: aliceblue;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.circ{
+    width: 3em;
+    height: 3em;
+    border-radius: 3em;
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    background-color: #242424;
+    width: 100%;
+    height: auto;
+}
+
+.item {
+    text-align: center;
+    color: aliceblue;
+    display: inline-block;
+    border-style: none;
+    height: auto;
+    width: 10%;
+}
+
+.item a {
+    text-decoration: none;
+    color: #ffffff;
+    display: inline-block;
+    padding: 0.7em;
+    background-color: #242424;
+    transition: background-color 0.3s ease;
+    border-style: none;
+}
+
+.item a:hover {
+    background-color: #2f0000;
+    color: rgb(90, 52, 52);
+}
+
+.Display {
+    background-color: #0c0c0c;
+    color: aliceblue;
+    margin: 4em;
+    padding: 2em;
+    height: auto;
+    border-radius: 0.5em;
+    box-shadow: 0 4px 8px 0 rgba(53, 0, 0, 0.2);
+    z-index: 1;
+}
+
+img {
+    text-align: center;
+    margin: auto;
+    height: 20em;
+    width: auto;
+    display: block;
+}
+
+.logo {
+    text-align: center;
+    margin: auto;
+    height: 5em;
+    width: auto;
+    display: block;
+}
+
+li{
+    list-style: none;
+}
+.add
+{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+}
+.edit{
+    text-align: center;
+    margin: auto;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    padding : 0.5em;
+    border-radius: 0.5em;
+    background-color: #333;
+    height: 2em;
+    width: auto;
+    color: #f45454;
+}
+
+.adminButton{
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    padding : 0.4em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #747474;
+    background-color: #333;
+    height: 3em;
+    width: auto;
+    color: #f45454;
+}
+
+.divider {
+    border: none; /* Remove default border */
+    height: 1px; /* Set the height of the line */
+    background-color: #ffffff; /* Set the color of the line */
+    margin: 1em 0; /* Add spacing above and below the line */
+    width: 100%; /* Make the line span the full width of the container */
+}
+.scp_select{
+    justify-content: center;
+    text-align: center;
+}
+
+.adminButton2{
+    text-align: center;
+    margin: auto;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    padding : 0.2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #747474;
+    background-color: #333;
+    height: 2em;
+    width: auto;
+    color: #f45454;
+}
+
+strong {
+    color: #751200;
+}
+
+.card{
+    width: 90%;
+    height: auto;
+    background-color: #0c0c0c;
+    color: aliceblue;
+    text-align: center;
+    margin: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(26, 0, 0, 0.2), 0 6px 20px 0 rgba(51, 0, 0, 0.19);
+}
+
+.card a{
+    color: aliceblue;
+    font-size: larger;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+}
+
+.card a:hover{
+    background-color: #1d1d1d;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    img {
+        height: 15em;
+    }
+
+    .Display {
+        margin: 0;
+        font-size: 20pt;
+        border-radius: 0;
+    }
+
+    .item {
+        height: auto;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .item a {
+        padding: 0.7em;
+        display: flex;
+        font-size: 16pt;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: auto;
+        height: 9vw;
+    }
+
+    body {
+        background-color: #0c0c0c;
+    }
+
+
+}
+
+/* More phones */
+@media (max-width: 768px) {
+    img {
+        height: 12em;
+    }
+
+    .Display {
+        border-radius: 0;
+        padding: 0.5em;
+        width: auto;
+        font-size: 16pt;
+    }
+
+    .item {
+        width: 20%;
+        font-size: 4vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .item a {
+        padding: 0.5em;
+        height: 9vw;
+        font-size: 12pt;
+    }
+
+    body {
+        background-color: #0c0c0c;
+    }
+
+    .card{
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+
+}
+
+
+/* Phones */
+@media (max-width: 480px) {
+    img {
+        height: 8em;
+    }
+
+    .card{
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .Display {
+        padding: 0.5em;
+        width: 100%;
+        height: auto;
+        font-size: 14pt;
+    }
+
+    .item {
+        width: 40%;
+        font-size: 15vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .item a {
+        padding: 0.4em;
+        height: 5vh;
+        font-size: 10pt;
+    }
+
+    body {
+        background-color: #0c0c0c;
+    }
+
+
+}
