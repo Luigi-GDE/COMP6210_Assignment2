@@ -30,9 +30,12 @@ function AdminPanel() {
     const addItem = async () => {
         const { data, error } = await supabase.from('scp_subjects').insert([newRecord]);
         if (error) {
-            console.error(error);
-        } else {
+            console.error("Error adding new SCP:", error);
+        } else if (data) {
+            // Add the new record to the items state
             setItems((prevItems) => [...prevItems, ...data]);
+
+            // Reset the newRecord state
             setNewRecord({ id: '', class: '', image: '', description: '', containment: '' });
         }
     };
@@ -68,7 +71,7 @@ function AdminPanel() {
 
             <div className="scp_select">
                 <ul>
-                    {items.map((item) => (
+                    {Array.isArray(items) && items.map((item) => (
                         <li key={item.id}>
                             {editRecord && editRecord.id === item.id ? (
                                 <>
