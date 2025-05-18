@@ -32,11 +32,9 @@ function Card()
                             <h2>SCP: {items.id}</h2>
                             <img
                                 src={
-                                    items.image
-                                        ? (items.image.startsWith('http://') || items.image.startsWith('https://')
-                                            ? items.image
-                                            : `https://uzfxafltcckxursnmvmn.supabase.co${items.image}`)
-                                        : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png'
+                                    items.image && (items.image.startsWith('http://') || items.image.startsWith('https://') || items.image.startsWith('/media/'))
+                                        ? (items.image.startsWith('http') ? items.image : `https://uzfxafltcckxursnmvmn.supabase.co${items.image}`)
+                                        : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png' // Fallback image
                                 }
                                 alt={items.id}
                                 className="circ"

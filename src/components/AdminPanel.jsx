@@ -85,11 +85,9 @@ function AdminPanel() {
                                     <h3>SCP-{item.id}</h3>
                                     <img
                                         src={
-                                            item.image
-                                                ? (item.image.startsWith('http://') || item.image.startsWith('https://')
-                                                    ? item.image
-                                                    : `https://uzfxafltcckxursnmvmn.supabase.co${item.image}`)
-                                                : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png'
+                                            item.image && (item.image.startsWith('http://') || item.image.startsWith('https://') || item.image.startsWith('/media/'))
+                                                ? (item.image.startsWith('http') ? item.image : `https://uzfxafltcckxursnmvmn.supabase.co${item.image}`)
+                                                : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png' // Fallback image
                                         }
                                         alt={item.id}
                                         className="circ"
