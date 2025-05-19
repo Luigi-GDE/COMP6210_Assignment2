@@ -28,15 +28,20 @@ function AdminPanel() {
     }, []);
 
     const addItem = async () => {
+        console.log("addItem function called");
         const { data, error } = await supabase.from('scp_subjects').insert([newRecord]);
+        console.log("Supabase response:", { data, error });
         if (error) {
             console.error("Error adding new SCP:", error);
         } else if (data) {
-            // Add the new record to the items state
-            setItems((prevItems) => [...prevItems, ...data]);
+            // Show a popup message
+            alert("SCP has been successfully added!");
 
             // Reset the newRecord state
             setNewRecord({ id: '', class: '', image: '', description: '', containment: '' });
+
+            // Refresh the page to fetch the updated data
+            window.location.reload();
         }
     };
 
