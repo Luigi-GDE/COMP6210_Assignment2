@@ -103,7 +103,7 @@ function AdminPanel() {
             )}
             <div className="scp_select">
                 <ul>
-                    {Array.isArray(items) && items.map((item) => (
+                    {Array.isArray(items) && items.map((item, idx) => (
                         <li key={item.id}>
                             {editRecord && editRecord.id === item.id ? (
                                 <>
@@ -142,9 +142,10 @@ function AdminPanel() {
                                     />
                                     <button onClick={() => startEditing(item)} className="adminButton2">Edit</button>
                                     <button onClick={() => deleteItem(item.id)} className="adminButton2">Delete</button>
-                                    <hr className="divider" />
                                 </>
                             )}
+                            {/* Always render divider except after last item */}
+                            {idx < items.length - 1 && <hr className="divider" />}
                         </li>
                     ))}
                 </ul>

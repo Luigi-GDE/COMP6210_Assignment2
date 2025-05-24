@@ -1,19 +1,26 @@
-body {
-    background-color: #333;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+/* === Base Layout and Background === */
+html {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(315deg, #2a0909 0%, #232326 70%, #18181b 100%);
 }
 
-html{
-    background-color: #333;
+body {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+    background: transparent;
 }
 
 .background {
-    background-color: #333;
-    height: auto;
+    background: radial-gradient(ellipse at bottom right, #2a0909 0%, #18181b 80%);
+    min-height: 100vh;
+    min-width: 100vw;
 }
 
+/* === Typography === */
 h1 {
     text-align: center;
     color: #f45454;
@@ -23,6 +30,7 @@ h2 {
     color: #b9b9b9;
 }
 
+/* === Intro Section === */
 .intro{
     width: 100%;
     height: auto;
@@ -31,11 +39,13 @@ h2 {
     color: aliceblue;
 }
 
+/* === Container Utility === */
 .container {
     margin: 0;
     padding: 0;
 }
 
+/* === Circular Images (SCP/Logo) === */
 .circ{
     width: 3em;
     height: 3em;
@@ -43,6 +53,7 @@ h2 {
     margin: auto;
 }
 
+/* === Navigation Bar === */
 nav {
     display: flex;
     background-color: #242424;
@@ -74,6 +85,7 @@ nav {
     color: rgb(90, 52, 52);
 }
 
+/* === Main Display Card === */
 .Display {
     background-color: #0c0c0c;
     color: aliceblue;
@@ -85,6 +97,7 @@ nav {
     z-index: 1;
 }
 
+/* === Images and Logo === */
 img {
     text-align: center;
     margin: auto;
@@ -101,16 +114,19 @@ img {
     display: block;
 }
 
+/* === List and Form Layouts === */
 li{
     list-style: none;
 }
-.add
-{
+
+.add {
     margin: auto;
     display: flex;
     justify-content: center;
     margin-top: 3em;
 }
+
+/* === Input and Select Styling === */
 .edit{
     text-align: center;
     margin: auto;
@@ -141,77 +157,108 @@ select.edit {
     min-width: 180px;
 }
 
-.adminButton{
+/* === Admin Panel Buttons === */
+.adminButton {
     text-align: center;
     display: block;
     margin: auto;
     margin-top: 2em;
-    padding : 0.4em;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding: 0.4em 2em;
     border-radius: 0.5em;
     border-style: solid;
     border-width: 0.1em;
-    border-color: #747474;
-    background-color: #333;
-    height: 3em;
-    width: auto;
+    border-color: #f45454;
+    background-color: #18181b;
     color: #f45454;
-}
-
-.adminButton,
-.adminButton2 {
+    font-weight: bold;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.adminButton:hover,
-.adminButton2:hover {
+.adminButton:hover {
     background-color: #f45454;
     color: #fff;
     border-color: #f45454;
     cursor: pointer;
 }
 
-.divider {
-    border: none; /* Remove default border */
-    height: 1px; /* Set the height of the line */
-    background-color: #ffffff; /* Set the color of the line */
-    margin: 1em 0; /* Add spacing above and below the line */
-    width: 100%; /* Make the line span the full width of the container */
+.adminButton2 {
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding: 0.2em 2em;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #751200;
+    background-color: #232326;
+    color: #f45454;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
+
+.adminButton2:hover {
+    background-color: #751200;
+    color: #fff;
+    border-color: #f45454;
+    cursor: pointer;
+}
+
+/* === Add Item Button === */
+.addButton {
+    text-align: center;
+    display: block;
+    margin: 2em auto 1em auto;
+    padding: 0.5em 2em;
+    border-radius: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #f45454;
+    background-color: #232326;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.addButton:hover {
+    background-color: #f45454;
+    color: #fff;
+    border-color: #751200;
+    cursor: pointer;
+}
+
+/* === Divider Line Between SCPs === */
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 1em 0;
+    width: 100%;
+}
+
+/* === SCP Select List Styling === */
 .scp_select{
     justify-content: center;
     text-align: center;
 }
 
-.adminButton2{
-    text-align: center;
-    margin: auto;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    margin-left: 0.3em;
-    margin-right: 0.3em;
-    padding : 0.2em;
-    padding-left: 2em;
-    padding-right: 2em;
-    border-radius: 0.5em;
-    border-style: solid;
-    border-width: 0.1em;
-    border-color: #747474;
-    background-color: #333;
-    height: 2em;
-    width: auto;
-    color: #f45454;
+.scp_select ul {
+    padding-left: 0;
+    margin-left: 0;
 }
 
+/* === Strong Text Highlight === */
 strong {
     color: #751200;
 }
 
+/* === SCP Card Styling === */
 .card{
     width: 90%;
     height: auto;
     background-color: #0c0c0c;
+    border-radius: 0;
     color: aliceblue;
     text-align: center;
     margin: auto;
@@ -220,7 +267,8 @@ strong {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(26, 0, 0, 0.2), 0 6px 20px 0 rgba(51, 0, 0, 0.19);
+    /* Softer, more subtle grey/white shadow */
+    box-shadow: 0 2px 8px 0 rgba(220, 220, 220, 0.10), 0 3px 12px 0 rgba(255,255,255,0.06);
 }
 
 .card a{
@@ -236,119 +284,170 @@ strong {
     background-color: #1d1d1d;
 }
 
-/* Tablets */
+/* === Responsive Design: Tablets and Below === */
 @media (max-width: 1024px) {
-    img {
-        height: 15em;
-    }
-
     .Display {
-        margin: 0;
-        font-size: 20pt;
-        border-radius: 0;
+        margin: 1em;
+        padding: 1em;
+        font-size: 1.1em;
     }
-
-    .item {
-        height: auto;
-        width: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .card {
+        flex-direction: column;
+        width: 98%;
+        margin-top: 1em;
+        margin-bottom: 1em;
     }
-
-    .item a {
-        padding: 0.7em;
-        display: flex;
-        font-size: 16pt;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: auto;
-        height: 9vw;
-    }
-
-    body {
-        background-color: #0c0c0c;
-    }
-
-
-}
-
-/* More phones */
-@media (max-width: 768px) {
     img {
         height: 12em;
     }
-
-    .Display {
-        border-radius: 0;
-        padding: 0.5em;
-        width: auto;
-        font-size: 16pt;
+    .add {
+        flex-direction: column;
+        align-items: stretch;
     }
-
-    .item {
-        width: 20%;
-        font-size: 4vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .edit {
+        width: 95vw;
+        max-width: 98%;
+        font-size: 1em;
     }
-
-    .item a {
-        padding: 0.5em;
-        height: 9vw;
-        font-size: 12pt;
-    }
-
-    body {
-        background-color: #0c0c0c;
-    }
-
-    .card{
-        margin-top: 1em;
-        margin-bottom: 1em;
-    }
-
-
 }
 
-
-/* Phones */
-@media (max-width: 480px) {
-    img {
-        height: 8em;
-    }
-
-    .card{
-        margin-top: 1em;
-        margin-bottom: 1em;
-    }
-
+/* === Responsive Design: Mobile Devices === */
+@media (max-width: 768px) {
     .Display {
+        margin: 0.5em;
         padding: 0.5em;
+        font-size: 1em;
+        border-radius: 0.3em;
+    }
+    .card {
+        flex-direction: column;
         width: 100%;
-        height: auto;
-        font-size: 14pt;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }
-
+    img, .logo {
+        height: 8em;
+        width: auto;
+    }
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
     .item {
-        width: 40%;
-        font-size: 15vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 100%;
+        font-size: 1em;
+        padding: 0.5em 0;
     }
-
     .item a {
-        padding: 0.4em;
-        height: 5vh;
-        font-size: 10pt;
+        width: 100%;
+        font-size: 1em;
+        padding: 0.7em 0;
     }
-
-    body {
-        background-color: #0c0c0c;
+    .add,
+    .edit-form,
+    form.edit-form {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1em;
+        width: 100%;
+        display: flex;
     }
-
-
+    .edit,
+    input.edit,
+    select.edit,
+    .edit-form input,
+    .edit-form select,
+    form.edit-form input,
+    form.edit-form select {
+        width: 70vw;
+        max-width: 98%;
+        font-size: 1em;
+        margin-bottom: 0.5em;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+        display: block;
+        box-sizing: border-box;
+    }
+    .adminButton, .adminButton2 {
+        width: 70vw;
+        max-width: 98%;
+        font-size: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    .scp_select ul li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .Display img {
+        width: 95vw;
+        max-width: 95%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .circ {
+        width: 3em !important;
+        height: 3em !important;
+        border-radius: 3em !important;
+        object-fit: cover;
+        display: block;
+        margin: auto;
+    }
 }
+
+/* === Responsive Design: Small Phones === */
+@media (max-width: 480px) {
+    .Display {
+        padding: 0.4em;
+        font-size: 0.95em;
+
+    }
+
+    .circ {
+        width: 3em !important;
+        height: 3em !important;
+        border-radius: 3em !important;
+        object-fit: cover;
+        display: block;
+        margin: auto;
+    }
+
+    .intro {
+    margin-bottom: 2em;
+    background-color: #131313;
+    }
+    .card {
+        width: 100%;
+        margin: 0.2em 0;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+    }
+
+    .edit, input.edit, select.edit, .adminButton, .adminButton2 {
+        width: 70vw;
+        font-size: 0.95em;
+        border-radius: 0;
+    }
+    h1 {
+        font-size: 1.2em;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    h3 {
+        font-size: 0.95em;
+    }
+    .Display img {
+        width: 95vw;
+        max-width: 95%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
