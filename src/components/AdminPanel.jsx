@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 
+console.log("Supabase client:", supabase);
+
 function AdminPanel() {
     const [items, setItems] = useState([]);
     const [newRecord, setNewRecord] = useState({
@@ -12,6 +14,7 @@ function AdminPanel() {
     });
 
     const [editRecord, setEditRecord] = useState(null);
+    const [deleteMessage, setDeleteMessage] = useState(""); // Add this state
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -29,28 +32,48 @@ function AdminPanel() {
 
     const addItem = async () => {
         console.log("addItem function called");
-        const { data, error } = await supabase.from('scp_subjects').insert([newRecord]);
-        console.log("Supabase response:", { data, error });
+        console.log("New Record:", newRecord);
+
+        // Ensure all fields are filled
+        if (!newRecord.id || !newRecord.class || !newRecord.image || !newRecord.description || !newRecord.containment) {
+            alert("Please fill in all fields before adding a new SCP.");
+            return;
+        }
+
+        // Check if SCP ID already exists
+        if (items.some(item => String(item.id) === String(newRecord.id))) {
+            alert(`SCP-${newRecord.id} already exists. Please use a unique SCP ID.`);
+            return;
+        }
+
+        // Convert id to a number
+        const recordToInsert = {
+            ...newRecord,
+            id: parseInt(newRecord.id, 10), // Ensure id is a number
+        };
+
+        const { error } = await supabase.from('scp_subjects').insert([recordToInsert]);
+
         if (error) {
             console.error("Error adding new SCP:", error);
-        } else if (data) {
-            // Show a popup message
+            alert("Failed to add SCP. Please check the console for details.");
+        } else {
             alert("SCP has been successfully added!");
-
-            // Reset the newRecord state
-            setNewRecord({ id: '', class: '', image: '', description: '', containment: '' });
-
-            // Refresh the page to fetch the updated data
-            window.location.reload();
+            window.location.reload(); // Force the page to reload
         }
     };
 
     const deleteItem = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this SCP?");
+        if (!confirmDelete) return;
+
         const { error } = await supabase.from('scp_subjects').delete().eq('id', id);
         if (error) {
             console.error(error);
         } else {
             setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+            setDeleteMessage(`SCP-${id} has been deleted.`);
+            setTimeout(() => setDeleteMessage(""), 3000); // Hide message after 3 seconds
         }
     };
 
@@ -59,7 +82,7 @@ function AdminPanel() {
     };
 
     const saveEdit = async (id) => {
-        const { data, error } = await supabase.from('scp_subjects').update(editRecord).eq('id', id);
+        const { error } = await supabase.from('scp_subjects').update(editRecord).eq('id', id);
         if (error) {
             console.error(error);
         } else {
@@ -73,7 +96,11 @@ function AdminPanel() {
     return (
         <div className="Display">
             <h1>Admin Panel</h1>
-
+            {deleteMessage && (
+                <div style={{ color: "#f45454", textAlign: "center", marginBottom: "1em" }}>
+                    {deleteMessage}
+                </div>
+            )}
             <div className="scp_select">
                 <ul>
                     {Array.isArray(items) && items.map((item) => (
@@ -81,7 +108,16 @@ function AdminPanel() {
                             {editRecord && editRecord.id === item.id ? (
                                 <>
                                     <input value={editRecord.id} onChange={(e) => setEditRecord({ ...editRecord, id: e.target.value })} className="edit" />
-                                    <input value={editRecord.class} onChange={(e) => setEditRecord({ ...editRecord, class: e.target.value })} className="edit" />
+                                    <select
+                                        value={editRecord.class}
+                                        onChange={(e) => setEditRecord({ ...editRecord, class: e.target.value })}
+                                        className="edit"
+                                    >
+                                        <option value="">Select Class</option>
+                                        <option value="Safe">Safe</option>
+                                        <option value="Euclid">Euclid</option>
+                                        <option value="Keter">Keter</option>
+                                    </select>
                                     <input value={editRecord.image} onChange={(e) => setEditRecord({ ...editRecord, image: e.target.value })} className="edit" />
                                     <input value={editRecord.description} onChange={(e) => setEditRecord({ ...editRecord, description: e.target.value })} className="edit" />
                                     <input value={editRecord.containment} onChange={(e) => setEditRecord({ ...editRecord, containment: e.target.value })} className="edit" />
@@ -95,13 +131,13 @@ function AdminPanel() {
                                         src={
                                             item.image && (item.image.startsWith('http://') || item.image.startsWith('https://') || item.image.startsWith('/media/'))
                                                 ? (item.image.startsWith('http') ? item.image : `https://uzfxafltcckxursnmvmn.supabase.co${item.image}`)
-                                                : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png' // Fallback image
+                                                : 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png'
                                         }
                                         alt={item.id}
                                         className="circ"
                                         onError={(e) => {
-                                            e.target.onerror = null; // Prevent infinite loop
-                                            e.target.src = 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png'; // Fallback image
+                                            e.target.onerror = null;
+                                            e.target.src = 'https://res.cloudinary.com/dnekjgjc2/image/upload/v1747171841/logo_ddi4xc.png';
                                         }}
                                     />
                                     <button onClick={() => startEditing(item)} className="adminButton2">Edit</button>
@@ -117,7 +153,16 @@ function AdminPanel() {
             <h1>Add New Record</h1>
             <div className="add">
                 <input value={newRecord.id} onChange={(e) => setNewRecord({ ...newRecord, id: e.target.value })} placeholder="SCP Id {eg: 308}" className="edit" />
-                <input value={newRecord.class} onChange={(e) => setNewRecord({ ...newRecord, class: e.target.value })} placeholder="Class" className="edit" />
+                <select
+                    value={newRecord.class}
+                    onChange={(e) => setNewRecord({ ...newRecord, class: e.target.value })}
+                    className="edit"
+                >
+                    <option value="">Select Class</option>
+                    <option value="Safe">Safe</option>
+                    <option value="Euclid">Euclid</option>
+                    <option value="Keter">Keter</option>
+                </select>
                 <input value={newRecord.image} onChange={(e) => setNewRecord({ ...newRecord, image: e.target.value })} placeholder="Image" className="edit" />
                 <input value={newRecord.description} onChange={(e) => setNewRecord({ ...newRecord, description: e.target.value })} placeholder="Description" className="edit" />
                 <input value={newRecord.containment} onChange={(e) => setNewRecord({ ...newRecord, containment: e.target.value })} placeholder="Containment" className="edit" />
