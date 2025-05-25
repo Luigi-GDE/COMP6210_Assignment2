@@ -17,17 +17,27 @@ body {
 .background {
     background: radial-gradient(ellipse at bottom right, #2a0909 0%, #18181b 80%);
     min-height: 100vh;
-    min-width: 100vw;
 }
 
 /* === Typography === */
 h1 {
     text-align: center;
     color: #f45454;
+    font-family: "Bebas Neue", sans-serif;
 }
 
 h2 {
     color: #b9b9b9;
+    font-family: "Marcellus SC", serif;
+}
+
+h3{
+    font-family: "Marcellus SC", serif;
+}
+
+p{
+    font-family: "Judson", serif;
+    font-size: 1.1em;
 }
 
 /* === Intro Section === */
@@ -67,7 +77,8 @@ nav {
     display: inline-block;
     border-style: none;
     height: auto;
-    width: 10%;
+    width: 12%;           /* Slightly wider for longer text */
+    white-space: nowrap;  /* Prevents wrapping */
 }
 
 .item a {
@@ -119,11 +130,17 @@ li{
     list-style: none;
 }
 
+.abov
+{
+    margin-bottom: 1em;
+}
 .add {
     margin: auto;
     display: flex;
     justify-content: center;
-    margin-top: 3em;
+    flex-wrap: wrap; /* <-- Add this line */
+    gap: 10px;       /* Optional: adds space between inputs */
+    max-width: 100%; /* Prevents overflow */
 }
 
 /* === Input and Select Styling === */
@@ -146,6 +163,19 @@ li{
     font-size: 1rem;
     margin-bottom: 8px;
     box-sizing: border-box;
+    max-width: 350px;   /* Add this line */
+    width: 100%;        /* Add this line */
+    min-width: 150px;   /* Optional: minimum width */
+    box-sizing: border-box;
+}
+
+/* Make description and containment inputs taller */
+.add input[placeholder="Description"],
+.add input[placeholder="Containment"] {
+    height: 5em;
+    min-height: 5em;
+    /* Optionally, allow multi-line input: */
+    /* If you want textarea instead, change input to textarea in your JSX */
 }
 
 .add .edit {
@@ -155,6 +185,21 @@ li{
 
 select.edit {
     min-width: 180px;
+}
+
+textarea.edit {
+    resize: vertical;
+    min-height: 5em;
+    max-width: 350px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #f45454;
+    background-color: #333;
+    border-radius: 0.5em;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
 }
 
 /* === Admin Panel Buttons === */
@@ -309,6 +354,20 @@ strong {
         max-width: 98%;
         font-size: 1em;
     }
+    textarea.edit {
+        width: 95vw;
+        max-width: 98%;
+        font-size: 1em;
+    }
+    .textarea-row {
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+    }
+    .textarea-row .edit {
+        width: 95vw;
+        max-width: 98%;
+    }
 }
 
 /* === Responsive Design: Mobile Devices === */
@@ -369,6 +428,12 @@ strong {
         display: block;
         box-sizing: border-box;
     }
+    textarea.edit {
+        width: 70vw;
+        max-width: 98%;
+        font-size: 1em;
+        margin-bottom: 0.5em;
+    }
     .adminButton, .adminButton2 {
         width: 70vw;
         max-width: 98%;
@@ -404,9 +469,7 @@ strong {
     .Display {
         padding: 0.4em;
         font-size: 0.95em;
-
     }
-
     .circ {
         width: 3em !important;
         height: 3em !important;
@@ -415,10 +478,9 @@ strong {
         display: block;
         margin: auto;
     }
-
     .intro {
-    margin-bottom: 2em;
-    background-color: #131313;
+        margin-bottom: 2em;
+        background-color: #131313;
     }
     .card {
         width: 100%;
@@ -426,17 +488,16 @@ strong {
         margin-bottom: 0.5em;
         margin-top: 0.5em;
     }
-
     .edit, input.edit, select.edit, .adminButton, .adminButton2 {
         width: 70vw;
         font-size: 0.95em;
         border-radius: 0;
     }
     h1 {
-        font-size: 1.2em;
+        font-size: 2.1em;
     }
     h2 {
-        font-size: 1em;
+        font-size: 1.5em;
     }
     h3 {
         font-size: 0.95em;
@@ -447,6 +508,49 @@ strong {
         height: auto;
         display: block;
         margin: 0 auto;
+    }
+    .textarea-row {
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+    }
+    .textarea-row .edit {
+        width: 95vw;
+        max-width: 98%;
+    }
+}
+
+/* === New Styles for Textarea Row === */
+.textarea-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.textarea-row .edit {
+    min-width: 0;
+    width: 100%;
+    max-width: 350px;
+    min-height: 7em;
+    max-height: 7em;
+    height: 7em;
+    resize: none;
+    /* Remove margin:auto if present */
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 900px) {
+    .textarea-row {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    .textarea-row .edit {
+        max-width: 100%;
+        width: 100%;
     }
 }
 

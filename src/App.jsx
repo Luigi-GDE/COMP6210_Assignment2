@@ -9,10 +9,12 @@ import NavMenu from "./components/NavMenu.jsx";
 import DisplayPage from "./components/DisplayPage.jsx";
 import Card from "./components/Card.jsx";
 import Intro from "./components/Intro.jsx";
-import AdminPanel from "./components/AdminPanel.jsx"; // Import AdminPanel
+import AdminPanel from "./components/AdminPanel.jsx";
 
+//function to handle the main content of the app
 function AppContent() {
     const location = useLocation();
+    //check for home
     const isHomePage = location.pathname === "/" || location.pathname === "/home";
 
     return (
@@ -20,10 +22,10 @@ function AppContent() {
             <NavMenu />
             {isHomePage && <Intro />}
             <Routes>
-                {/* Redirect old default to new home */}
+                {/* Redirect old default to home */}
                 <Route path="/" element={<Navigate to="/home" />} />
 
-                {/* New home route with card */}
+                {/* home route with card */}
                 <Route path="/home" element={<Card />} />
 
                 {/* SCP subject route */}
@@ -36,6 +38,7 @@ function AppContent() {
     );
 }
 
+//router component to wrap the main content to allow navigation
 export default function App() {
     return (
         <div className="background">
