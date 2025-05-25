@@ -13,6 +13,7 @@ function AdminPanel() {
         containment: ''
     });
     const [editRecord, setEditRecord] = useState(null);
+    const [editTargetId, setEditTargetId] = useState(null); // <-- Add this line
     const [deleteMessage, setDeleteMessage] = useState("");
 
     //fetch SCP records from the database on component mount
@@ -75,14 +76,15 @@ function AdminPanel() {
         } else {
             setItems((prevItems) => prevItems.filter((item) => item.id !== id));
             setDeleteMessage(`SCP-${id} has been deleted.`);
-            setTimeout(() => setDeleteMessage(""), 3000); // Hide message after 3 seconds
+            setTimeout(() => setDeleteMessage(""), 3000);
         }
     };
 
     //block to start editing an SCP record
     //This function selects the SCP record to be edited and sets it in the editRecord state
     const startEditing = (item) => {
-        setEditRecord(item);
+        setEditRecord({ ...item });
+        setEditTargetId(item.id); // <-- Track the original id
     };
 
     //block to save the edited SCP record
@@ -95,6 +97,7 @@ function AdminPanel() {
                 prevItems.map((item) => (item.id === id ? { ...item, ...editRecord } : item))
             );
             setEditRecord(null);
+            setEditTargetId(null); // <-- Reset after save
             alert("SCP has been successfully saved");
         }
     };
@@ -138,7 +141,7 @@ function AdminPanel() {
                 <ul>
                     {Array.isArray(items) && items.map((item, idx) => (
                         <li key={item.id}>
-                            {editRecord && editRecord.id === item.id ? (
+                            {editRecord && editTargetId === item.id ? ( // <-- Use editTargetId here
                                 <>
                                     {/* Edit Form */}
                                     <input value={editRecord.id} onChange={(e) => setEditRecord({ ...editRecord, id: e.target.value })} className="edit" />
@@ -155,8 +158,8 @@ function AdminPanel() {
                                     <input value={editRecord.image} onChange={(e) => setEditRecord({ ...editRecord, image: e.target.value })} className="edit" />
                                     <textarea value={editRecord.description} onChange={(e) => setEditRecord({ ...editRecord, description: e.target.value })} className="edit" rows={5} />
                                     <textarea value={editRecord.containment} onChange={(e) => setEditRecord({ ...editRecord, containment: e.target.value })} className="edit" rows={5} />
-                                    <button onClick={() => saveEdit(item.id)} className="adminButton2">Save</button>
-                                    <button onClick={() => setEditRecord(null)} className="adminButton2">Cancel</button>
+                                    <button onClick={() => saveEdit(editTargetId)} className="adminButton2">Save</button>
+                                    <button onClick={() => { setEditRecord(null); setEditTargetId(null); }} className="adminButton2">Cancel</button>
                                 </>
                             ) : (
                                 <>
