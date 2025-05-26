@@ -13,7 +13,7 @@ function AdminPanel() {
         containment: ''
     });
     const [editRecord, setEditRecord] = useState(null);
-    const [editTargetId, setEditTargetId] = useState(null); // <-- Add this line
+    const [editTargetId, setEditTargetId] = useState(null); // Track the original id of the record being edited
     const [deleteMessage, setDeleteMessage] = useState("");
 
     //fetch SCP records from the database on component mount
@@ -35,25 +35,31 @@ function AdminPanel() {
         console.log("addItem function called");
         console.log("New Record:", newRecord);
 
-        //make sure all fields are filled
+        // Ensure all fields are filled
         if (!newRecord.id || !newRecord.class || !newRecord.image || !newRecord.description || !newRecord.containment) {
             alert("Please fill in all fields before adding a new SCP.");
             return;
         }
 
-        //check if SCP id entry already exists
+        // Validate that the ID is a number
+        if (isNaN(newRecord.id)) {
+            alert("The SCP ID must be a valid number.");
+            return;
+        }
+
+        // Check if SCP ID already exists
         if (items.some(item => String(item.id) === String(newRecord.id))) {
             alert(`SCP-${newRecord.id} already exists. Please use a unique SCP ID.`);
             return;
         }
 
-        //Convert id to a number for correct database entry
+        // Convert id to a number
         const recordToInsert = {
             ...newRecord,
-            id: parseInt(newRecord.id, 10),
+            id: parseInt(newRecord.id, 10), // Ensure id is a number
         };
 
-        //insert attempt with message handling
+        // Insert the new record into the database
         const { error } = await supabase.from('scp_subjects').insert([recordToInsert]);
 
         if (error) {
@@ -61,7 +67,7 @@ function AdminPanel() {
             alert("Failed to add SCP. Please check the console for details.");
         } else {
             alert("SCP has been successfully added!");
-            window.location.reload();
+            window.location.reload(); // Reload the page to fetch the updated list
         }
     };
 
